@@ -24,8 +24,9 @@ You will then be able to run the unit tests using:-
 ./vendor/bin/phpunit
 ```
 
-PHP version 7.4
+## Comandos de instalacion PHP version 7.4 
 
+```bash
 #!/bin/bash
 
 apt-get update
@@ -58,4 +59,5 @@ composer install
 export XDEBUG_MODE=coverage
 vendor/bin/phpunit --log-junit junit.xml
 phpunit --coverage-clover coverage-report.xml
-  
+
+```
