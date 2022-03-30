@@ -71,15 +71,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           path: artifacts
-      - name: UT
-        # You may pin to the exact commit or the version.
-        # uses: rethab/bash-action@8d1f7b182b1a1b00759f7ae1b67d5afb2a3494e9
-        uses: rethab/bash-action@v1
-        with:
-          command: |
-            ls artifacts/
-
       - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: mikepenz/action-junit-report@v3
         with:
-          files: "artifacts/**/*.xml"
+          report_paths: 'artifacts/*.xml'
