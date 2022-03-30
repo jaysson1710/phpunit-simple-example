@@ -29,7 +29,7 @@ jobs:
       uses: rethab/bash-action@v1
       with:
         command: |
-          wget https://getcomposer.org/installer -O composer-setup.php
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
           php --version
           cat composer-setup.php
         
