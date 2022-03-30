@@ -20,6 +20,7 @@ jobs:
       uses: rethab/bash-action@v1
       with:
         command: |
+          apt-get install -y curl php7.4-cli php7.4-mbstring  phpunit php7.4 php7.4-common php7.4-opcache php7.4-mcrypt php7.4-cli php7.4-gd php7.4-curl php7.4-mysql php7.4-xml php7.4-intl php7.4-intl php7.4-mbstring php7.4-zip php7.4-mbstring php7.4-xdebug
           composer install
         
     - name: UT
