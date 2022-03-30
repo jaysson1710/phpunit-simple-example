@@ -75,3 +75,7 @@ jobs:
         uses: mikepenz/action-junit-report@v3
         with:
           report_paths: '**/*.xml'
+      - name: Publish Unit Test
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        with:
+          files: "**/*.xml"
