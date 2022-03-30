@@ -14,36 +14,32 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3     
-    - name: Bash Action
+    - name: composer
       # You may pin to the exact commit or the version.
       # uses: rethab/bash-action@8d1f7b182b1a1b00759f7ae1b67d5afb2a3494e9
       uses: rethab/bash-action@v1
       with:
         command: |
-          echo "jason"
-    - uses: actions/github-script@v6
-      id: compose
-      with:
-        script: |
-            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-            COMPOSER=906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8
-            php -r "if (hash_file('SHA384', 'composer-setup.php') === '$COMPOSER') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-            php composer-setup.php --install-dir=/usr/local/bin --filename=composer
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          COMPOSER=906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8
+          php -r "if (hash_file('SHA384', 'composer-setup.php') === '$COMPOSER') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+          php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 
-            composer update
-            composer require cviebrock/eloquent-sluggable
-            composer install
-        result-encoding: string
-    
-    - uses: actions/github-script@v6
-      id: test
+          composer update
+          composer require cviebrock/eloquent-sluggable
+          composer install
+        
+    - name: UT
+      # You may pin to the exact commit or the version.
+      # uses: rethab/bash-action@8d1f7b182b1a1b00759f7ae1b67d5afb2a3494e9
+      uses: rethab/bash-action@v1
       with:
-        script: |
+        command: |
           export XDEBUG_MODE=coverage
           vendor/bin/phpunit
           vendor/bin/phpunit --log-junit junit.xml
           vendor/bin/phpunit --coverage-clover coverage-report.xml
-        result-encoding: string
+
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
