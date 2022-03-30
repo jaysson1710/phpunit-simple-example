@@ -26,7 +26,7 @@ jobs:
             composer update
             composer require cviebrock/eloquent-sluggable
             composer install
-    
+        result-encoding: string
     
     - uses: actions/github-script@v6
       id: test
@@ -36,7 +36,7 @@ jobs:
           vendor/bin/phpunit
           vendor/bin/phpunit --log-junit junit.xml
           vendor/bin/phpunit --coverage-clover coverage-report.xml
-    
+        result-encoding: string
     - name: Publish Unit Test Results
       uses: EnricoMi/publish-unit-test-result-action@v1
       with:
