@@ -30,7 +30,8 @@ jobs:
       with:
         command: |
           wget https://getcomposer.org/installer -O composer-setup.php
-          cat composer-setup-php
+          php --version
+          cat composer-setup.php
         
     - name: UT
       # You may pin to the exact commit or the version.
