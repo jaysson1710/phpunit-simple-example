@@ -74,4 +74,4 @@ jobs:
       - name: Publish Unit Test Results
         uses: mikepenz/action-junit-report@v3
         with:
-          report_paths: 'artifacts/*.xml'
+          report_paths: '**/*.xml'
