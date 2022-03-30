@@ -56,13 +56,23 @@ jobs:
           vendor/bin/phpunit --log-junit junit.xml
           vendor/bin/phpunit --coverage-clover coverage-report.xml
 
-    - name: Publish Unit Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
+    - name: Upload Unit Test Results
+      uses: actions/upload-artifact@v2
       with:
-        files: "**/junit.xml"
+        name: Unit Test Results (php ${{ matrix.python-version }})
+        path: junit.xml
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+  publish-test-results:
+    name: "Publish Unit Tests Results"
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v2
+        with:
+          path: artifacts
 
-    # - name: Run test suite
-    #   run: composer run-script test
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        with:
+          files: "artifacts/**/*.xml"
