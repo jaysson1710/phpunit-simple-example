@@ -1,3 +1,8 @@
+## Status buils
+
+|branch|[![PHP Composer](https://github.com/jaysson1710/phpunit-simple-example/actions/workflows/php.yml/badge.svg)](https://github.com/jaysson1710/phpunit-simple-example/actions/workflows/php.yml)|
+
+
 A Simple PHPUnit Example
 ========================
 
